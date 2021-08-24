@@ -72,3 +72,17 @@ body {
 .indexedStep.accomplished {
   background-color: rgba(0, 116, 217, 1);
 }
+.green-info {
+  color: green;
+  width: 10px;
+}
+.__react_component_tooltip {
+  box-shadow: 1px 1px rgb(146, 146, 146);
+  color: #106dd2 !important;
+  font-family: "Roboto";
+  font-weight: 500;
+  background: white !important;
+}
+.popHeader {
+  font-size: 18px;
+}

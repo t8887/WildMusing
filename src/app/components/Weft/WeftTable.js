@@ -15,7 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import './style.scss'
-
+import PopUp from "./Popup"
 const useRowStyles = makeStyles({
     root: {
 
@@ -24,16 +24,23 @@ const useRowStyles = makeStyles({
         background: '#0064d0'
     },
     table: {
+        boxShadow: "2px 2px 2px",
         background: '#0064d0',
         color: '#ffffff',
         fontColor: 'black',
     },
+    mt: {
+        // color: '#0064d0',
+        fontFamily: "Roboto",
+        fontWeight: "500",
+    },
     th: {
         // background: '#ffffff',
-        color: '#142045',
+        color: "#0064D0 !important"
+        // color: '#142045',
     },
     tr: {
-        color: '#142045',
+        color: "#0064D0 !important",
     }
 });
 
@@ -116,7 +123,7 @@ const data = [
         BalanceWeft: "2450",
         LastWeftIssueDate: "01/07/2021",
         NextIssueDate: "01/07/2021",
-        Status: "Regular",
+        Status: "Urgant",
         tableData: [{
             Quality: "1",
             Count: "60CBD",
@@ -150,32 +157,55 @@ function Row(props) {
     const { e } = props;
     console.log('data1: ', e);
     const [open, setOpen] = useState(false);
+
+    // for btn in two tables
+    const a = 1;
+
     const classes = useRowStyles();
 
     return (
         <React.Fragment>
-            <TableRow className={classes.root}>
-                <TableCell>
+            <TableRow key={e.name} className={classes.root} aria-label="expand row" onClick={() => setOpen(!open)}>
+                {/* <TableCell>
                     <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
+                </TableCell> */}
+                <TableCell className={classes.mt} align='center'>{e.Weaver}</TableCell>
+                <TableCell className={classes.mt} align='center'>{e.Count}</TableCell>
+                <TableCell className={classes.mt} align='center'>{e.WeftRequired}</TableCell>
+                <TableCell className={classes.mt} align='center'>{e.BalanceWeft}</TableCell>
+                <TableCell className={classes.mt} align='center'>{e.LastWeftIssueDate}</TableCell>
+                <TableCell className={classes.mt} align='center'>{e.NextIssueDate}</TableCell>
+                <TableCell className={classes.mt} align='center'>{e.Status}</TableCell>
+                {e.Status === "Regular" ? (
+                    <TableCell align='center'>
+                        <span className='badge' style={{ color: '#34e15a', border: '1px solid #34e15a' }}>
+                            <i className="mdi mdi-check-circle" />
+                            {e.Status}
+                        </span>
+                    </TableCell>
+                ) : (
+                    <TableCell align='center'>
+                        <span className='badge' style={{ color: 'red', border: '1px solid red' }}>
+                            <i className="mdi mdi-check-circle" />
+                            {e.Status}
+                        </span>
+                    </TableCell>
+                )}
+                <TableCell align='center'>
+                    <PopUp
+                        a={a}
+                    />
+
                 </TableCell>
-                <TableCell component="th" scope="row">{e.Weaver}</TableCell>
-                <TableCell >{e.Count}</TableCell>
-                <TableCell >{e.Weaver}</TableCell>
-                <TableCell >{e.WeftRequired}</TableCell>
-                <TableCell >{e.BalanceWeft}</TableCell>
-                <TableCell >{e.LastWeftIssueDate}</TableCell>
-                <TableCell >{e.NextIssueDate}</TableCell>
-                <TableCell >{e.Status}</TableCell>
-                <TableCell >{e.Status}</TableCell>
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
+                <TableCell style={{ padding: 0 }} colSpan={12}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
                             <Table size="small" aria-label="purchases">
-                                <TableHead>
+                                <TableHead >
                                     <TableRow className={classes.th}>
                                         <TableCell className={classes.tr}>Quality</TableCell>
                                         <TableCell className={classes.tr}>Count</TableCell>
@@ -208,23 +238,23 @@ function Row(props) {
     );
 }
 
-Row.propTypes = {
-    row: PropTypes.shape({
-        calories: PropTypes.number.isRequired,
-        carbs: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        history: PropTypes.arrayOf(
-            PropTypes.shape({
-                amount: PropTypes.number.isRequired,
-                customerId: PropTypes.string.isRequired,
-                date: PropTypes.string.isRequired,
-            }),
-        ).isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        protein: PropTypes.number.isRequired,
-    }).isRequired,
-};
+// Row.propTypes = {
+//     Row: PropTypes.shape({
+//         calories: PropTypes.number.isRequired,
+//         carbs: PropTypes.number.isRequired,
+//         fat: PropTypes.number.isRequired,
+//         history: PropTypes.arrayOf(
+//             PropTypes.shape({
+//                 amount: PropTypes.number.isRequired,
+//                 customerId: PropTypes.string.isRequired,
+//                 date: PropTypes.string.isRequired,
+//             }),
+//         ).isRequired,
+//         name: PropTypes.string.isRequired,
+//         price: PropTypes.number.isRequired,
+//         protein: PropTypes.number.isRequired,
+//     }).isRequired,
+// };
 
 
 
@@ -236,7 +266,6 @@ export default function WeftTable() {
             <Table aria-label="collapsible table">
                 <TableHead >
                     <TableRow className={classes.table}>
-                        <TableCell />
                         <TableCell>Weaver</TableCell>
                         <TableCell>Count</TableCell>
                         <TableCell>Weft required</TableCell>

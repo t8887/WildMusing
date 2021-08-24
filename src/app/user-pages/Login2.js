@@ -45,8 +45,6 @@ const Login2 = () => {
             notify.show("Fill all the fields", 'error');
         } else {
             e.preventDefault();
-
-
             console.log(username, password);
             const payload = {
                 email: username,

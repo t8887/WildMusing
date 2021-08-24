@@ -7,9 +7,14 @@ body {
 .MuiTableCell-root.MuiTableCell-head {
   color: white;
 }
-
+.MuiTableCell-root {
+  padding: 10px;
+}
+.MuiTableRow-root .makeStyles-root {
+  cursor: pointer !important;
+}
 .MuiTableRow-head {
-  background: #7eabfd;
+  background: whitesmoke;
   border-radius: 10px;
 }
 .MuiTableRow-root.MuiTableRow-head > th {
@@ -50,8 +55,17 @@ body {
 .bt1:hover {
   background-color: #106dd2;
 }
+.btn1:active {
+  background-color: #106dd2 !important;
+}
 .btn2 {
   background-color: #106dd2;
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
+
+.MuiOutlinedInput-input {
+  padding: 14px !important;
 }
 
 .RSPBprogression {
@@ -68,7 +82,32 @@ body {
   justify-content: center;
   align-items: center;
 }
-
+.MuiBox-root {
+  margin: 0px !important;
+}
 .indexedStep.accomplished {
   background: #0074d9;
+}
+.btw {
+  // background: #0074d9;
+  box-shadow: 1px 1px 1px 1px black;
+  color: white;
+}
+
+.info {
+  color: #0074d9;
+  font-size: 20px;
+}
+.RSPBprogressBar {
+  margin: 20px;
+  height: 2px !important;
+  width: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.table-row2 {
+  padding: 2px !important;
+  font-weight: 400 !important;
+  border-bottom: 1px solid rgba(224, 224, 224, 0) !important;
 }

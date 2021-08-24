@@ -15,6 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import "react-step-progress-bar/styles.css";
+import PopUp from "./Popup"
 import { ProgressBar, Step } from "react-step-progress-bar";
 import './style.scss'
 
@@ -26,11 +27,26 @@ const useRowStyles = makeStyles({
         background: '#0064d0'
     },
     table: {
+        boxShadow: "2px 2px 2px",
         background: '#0064d0',
+        color: '#ffffff',
         fontColor: 'black',
     },
+    mt: {
+        // color: '#0064d0',
+        fontFamily: "Roboto",
+        fontWeight: "500",
+    },
+    th: {
+        // background: '#ffffff',
+        color: "#0064D0 !important"
+        // color: '#142045',
+    },
     tr: {
-        color: '#142045',
+        color: "#0064D0 !important",
+    },
+    m2: {
+        borderBottom: "1px solid rgb(17 17 17 / 0%); !important"
     }
 });
 
@@ -144,60 +160,69 @@ const data = [
 ]
 
 
-function Row(props) {
-    const { e } = props;
+function Row({ e, a }) {
     console.log('data1: ', e);
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
 
     return (
         <React.Fragment>
-            <TableRow className={classes.root}>
-                <TableCell>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton>
-                </TableCell>
-                <TableCell component="th" scope="row">{e.Weaver}</TableCell>
-                <TableCell align='center'>{e.Count}</TableCell>
-                <TableCell align='center'>{e.Weaver}</TableCell>
-                <TableCell align='center'>{e.WeftRequired}</TableCell>
-                <TableCell align='center'><ProgressBar
-                    percent={50}
-                >
-                    <Step>
-                        {({ accomplished, index }) => (
-                            <div
-                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
-                            >
-                                {index + 1}
-                            </div>
-                        )}
-                    </Step>
-                    <Step>
-                        {({ accomplished, index }) => (
-                            <div
-                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
-                            >
-                                {index + 1}
-                            </div>
-                        )}
-                    </Step>
-                    <Step>
-                        {({ accomplished, index }) => (
-                            <div
-                                className={`indexedStep ${accomplished ? "accomplished" : null}`}
-                            >
-                                {index + 1}
-                            </div>
-                        )}
-                    </Step>
+            <TableRow className={classes.root} onClick={() => setOpen(!open)}>
+                <TableCell align='center' className={classes.mt} scope="row">{e.Weaver}</TableCell>
+                <TableCell align='center' className={classes.mt}>{e.Count}</TableCell>
+                <TableCell align='center' className={classes.mt}>{e.Count}</TableCell>
+                <TableCell align='center' className={classes.mt}>{e.Weaver}</TableCell>
+                <TableCell align='center' className={classes.mt}>{e.WeftRequired}</TableCell>
+                <TableCell align='center' className={classes.mt}>
+                    <div className='row justify-content-between'>
+                        <TableCell align='center' className='table-row2 nt1'>Pick In</TableCell>
+                        <TableCell align='center' className='table-row2 nt1 row'>
+                            <div>On the Way</div>
+                        </TableCell>
+                        <TableCell align='center' className='table-row2 nt1 row'>
+                            <div>Delivery</div>
+                        </TableCell>
+                    </div>
+                    <ProgressBar
+                        percent={50}
+                    >
+                        <Step>
+                            {({ accomplished, index }) => (
+                                <div
+                                    className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                                >
+                                    {index + 1}
+                                </div>
+                            )}
+                        </Step>
 
-                </ProgressBar>
+                        <Step>
+                            {({ accomplished, index }) => (
+                                <div
+                                    className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                                >
+                                    {index + 1}
+                                </div>
+                            )}
+                        </Step>
+                        <Step>
+                            {({ accomplished, index }) => (
+                                <div
+                                    className={`indexedStep ${accomplished ? "accomplished" : null}`}
+                                >
+                                    {index + 1}
+                                </div>
+                            )}
+                        </Step>
+                    </ProgressBar>
+
                 </TableCell>
-                <TableCell align='center' >{e.NextIssueDate}</TableCell>
+                <TableCell align='center' className={classes.mt}>
+                    <PopUp
+                        a={a} />
+                </TableCell>
             </TableRow>
-            <TableRow>
+            {/* <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
@@ -231,7 +256,7 @@ function Row(props) {
                         </Box>
                     </Collapse>
                 </TableCell>
-            </TableRow>
+            </TableRow> */}
         </React.Fragment>
     );
 }
@@ -257,19 +282,20 @@ Row.propTypes = {
 
 
 export default function WeftTable() {
+    const a = 0;
     const classes = useRowStyles();
     return (
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead >
                     <TableRow className={classes.table}>
-                        <TableCell align="center" className={classes.tr}>Quality</TableCell>
-                        <TableCell align="center" className={classes.tr}>Count</TableCell>
-                        <TableCell align="center" className={classes.tr}>Mill Name</TableCell>
-                        <TableCell align="center" className={classes.tr}>Bags</TableCell>
-                        <TableCell align="center" className={classes.tr}>Weft issue</TableCell>
-                        <TableCell align="center" className={classes.tr}>Daily Status</TableCell>
-                        <TableCell align="center" className={classes.tr}>Info</TableCell>
+                        <TableCell align="center" >Quality</TableCell>
+                        <TableCell align="center" >Count</TableCell>
+                        <TableCell align="center" >Mill Name</TableCell>
+                        <TableCell align="center" >Bags</TableCell>
+                        <TableCell align="center" >Weft issue</TableCell>
+                        <TableCell align="center" >Daily Status</TableCell>
+                        <TableCell align="center" >Info</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>

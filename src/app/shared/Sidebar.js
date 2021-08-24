@@ -40,6 +40,7 @@ class Sidebar extends Component {
       { path: '/icons', state: 'iconsMenuOpen' },
       { path: '/charts', state: 'chartsMenuOpen' },
       { path: '/user-pages', state: 'userPagesMenuOpen' },
+      { path: '/weving', state: 'wevingMenuOpen' },
       { path: '/error-pages', state: 'errorPagesMenuOpen' },
     ];
 
@@ -121,19 +122,14 @@ class Sidebar extends Component {
             </Link>
           </li>
 
-          {/* <li className={this.isPathActive('/weaving') ? 'nav-item active' : 'nav-item'}>
-            <Link className="nav-link" to="/weaving">
-              <i className="mdi mdi-message menu-icon"></i>
-              <span className="menu-title">Weaving Enquires & Responses</span>
-            </Link>
-          </li> */}
+
           <li className={this.isPathActive('/user-pages') ? 'nav-item active' : 'nav-item'}>
-            <div className={this.state.userPagesMenuOpen ? 'nav-link menu-expanded' : 'nav-link'} onClick={() => this.toggleMenuState('userPagesMenuOpen')} data-toggle="collapse">
+            <div className={this.state.wevingMenuOpen ? 'nav-link menu-expanded' : 'nav-link'} onClick={() => this.toggleMenuState('wevingMenuOpen')} data-toggle="collapse">
               <i className="mdi mdi-lock-outline menu-icon"></i>
               <span className="menu-title"> Enquires & Responses</span>
               <i className="menu-arrow"></i>
             </div>
-            <Collapse in={this.state.userPagesMenuOpen}>
+            <Collapse in={this.state.wevingMenuOpen}>
               <ul className="nav flex-column sub-menu">
                 <li className="nav-item"> <Link className={this.isPathActive('/Weaving') ? 'nav-link active' : 'nav-link'} to="/Weaving">Weaving</Link></li>
                 <li className="nav-item"> <Link className={this.isPathActive('/Sizing') ? 'nav-link active' : 'nav-link'} to="/Sizing">Sizing</Link></li>

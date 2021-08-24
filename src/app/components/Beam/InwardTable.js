@@ -12,6 +12,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import ReactTooltip from 'react-tooltip';
+import Popup from './Popup'
+
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import './style.scss'
@@ -33,217 +36,121 @@ const useRowStyles = makeStyles({
 
 const data = [
     {
-        Weaver: "Parag P",
-        Count: "60CBD",
-        WeftRequired: "4450",
-        WeftIssued: "2000",
-        BalanceWeft: "2450",
-        LastWeftIssueDate: "01/07/2021",
-        NextIssueDate: "01/07/2021",
-        Status: "Regular",
-        tableData: [{
-            Quality: "1",
-            Count: "60CBD",
-            WeftRequired: "2000",
-            WeftIssued: "1000",
-            BalanceWeft: "1000",
-            LastWeftIssueDate: "01/07/2021",
-            NextIssueDate: "01/07/2021",
-        }, {
-            Quality: "1",
-            Count: "60CBD",
-            WeftRequired: "2000",
-            WeftIssued: "1000",
-            BalanceWeft: "1000",
-            LastWeftIssueDate: "01/07/2021",
-            NextIssueDate: "01/07/2021",
-        }, {
-            Quality: "1",
-            Count: "60CBD",
-            WeftRequired: "2000",
-            WeftIssued: "1000",
-            BalanceWeft: "1000",
-            LastWeftIssueDate: "01/07/2021",
-            NextIssueDate: "01/07/2021",
-        }]
+        Ctr: "1",
+        Quality: `"63""/128*72/40*40"`,
+        Weaver: "T7SON",
+        beamInMtrs: "4450",
+        pendingMtrs: "5000",
+        beamReqDate: "01/07/2021",
+        emptyBeamIssue: "01/07/2021",
+        beamIssueInward: "01/07/2021",
     },
     {
-        Weaver: "Parag P",
-        Count: "60CBD",
-        WeftRequired: "4450",
-        WeftIssued: "2000",
-        BalanceWeft: "2450",
-        LastWeftIssueDate: "01/07/2021",
-        NextIssueDate: "01/07/2021",
-        Status: "Regular",
-        tableData: [{
-            Quality: "1",
-            Count: "60CBD",
-            WeftRequired: "2000",
-            WeftIssued: "1000",
-            BalanceWeft: "1000",
-            LastWeftIssueDate: "01/07/2021",
-            NextIssueDate: "01/07/2021",
-        }, {
-            Quality: "1",
-            Count: "60CBD",
-            WeftRequired: "2000",
-            WeftIssued: "1000",
-            BalanceWeft: "1000",
-            LastWeftIssueDate: "01/07/2021",
-            NextIssueDate: "01/07/2021",
-        }, {
-            Quality: "1",
-            Count: "60CBD",
-            WeftRequired: "2000",
-            WeftIssued: "1000",
-            BalanceWeft: "1000",
-            LastWeftIssueDate: "01/07/2021",
-            NextIssueDate: "01/07/2021",
-        }]
-    }, {
-        Weaver: "Parag P",
-        Count: "60CBD",
-        WeftRequired: "4450",
-        WeftIssued: "2000",
-        BalanceWeft: "2450",
-        LastWeftIssueDate: "01/07/2021",
-        NextIssueDate: "01/07/2021",
-        Status: "Regular",
-        tableData: [{
-            Quality: "1",
-            Count: "60CBD",
-            WeftRequired: "2000",
-            WeftIssued: "1000",
-            BalanceWeft: "1000",
-            LastWeftIssueDate: "01/07/2021",
-            NextIssueDate: "01/07/2021",
-        }, {
-            Quality: "1",
-            Count: "60CBD",
-            WeftRequired: "2000",
-            WeftIssued: "1000",
-            BalanceWeft: "1000",
-            LastWeftIssueDate: "01/07/2021",
-            NextIssueDate: "01/07/2021",
-        }, {
-            Quality: "1",
-            Count: "60CBD",
-            WeftRequired: "2000",
-            WeftIssued: "1000",
-            BalanceWeft: "1000",
-            LastWeftIssueDate: "01/07/2021",
-            NextIssueDate: "01/07/2021",
-        }]
+        Ctr: "1",
+        Quality: `"63""/128*72/40*40"`,
+        Weaver: "T7SON",
+        beamInMtrs: "4450",
+        beamReqDate: "01/07/2021",
+        emptyBeamIssue: "01/07/2021",
+        beamIssueInward: "01/07/2021",
+    },
+    {
+        Ctr: "1",
+        Quality: `"63""/128*72/40*40"`,
+        Weaver: "T7SON",
+        beamInMtrs: "4450",
+        beamReqDate: "01/07/2021",
+        emptyBeamIssue: "01/07/2021",
+        beamIssueInward: "01/07/2021",
+    },
+    {
+        Ctr: "1",
+        Quality: `"63""/128*72/40*40"`,
+        Weaver: "T7SON",
+        beamInMtrs: "4450",
+        beamReqDate: "01/07/2021",
+        emptyBeamIssue: "01/07/2021",
+        beamIssueInward: "01/07/2021",
+    },
+    {
+        Ctr: "1",
+        Quality: `"63""/128*72/40*40"`,
+        Weaver: "T7SON",
+        beamInMtrs: "4450",
+        beamReqDate: "01/07/2021",
+        emptyBeamIssue: "01/07/2021",
+        beamIssueInward: "01/07/2021",
     }
 ]
-
-
-function Row(props) {
-    const { e } = props;
-    console.log('data1: ', e);
-    const [open, setOpen] = useState(false);
-    const classes = useRowStyles();
-
-    return (
-        <React.Fragment>
-            <TableRow className={classes.root}>
-                <TableCell>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton>
-                </TableCell>
-                <TableCell component="th" scope="row">{e.Weaver}</TableCell>
-                <TableCell >{e.Count}</TableCell>
-                <TableCell >{e.Weaver}</TableCell>
-                <TableCell >{e.WeftRequired}</TableCell>
-                <TableCell >{e.BalanceWeft}</TableCell>
-                <TableCell >{e.LastWeftIssueDate}</TableCell>
-                <TableCell >{e.NextIssueDate}</TableCell>
-                <TableCell >{e.Status}</TableCell>
-                <TableCell >{e.Status}</TableCell>
-            </TableRow>
-            <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box margin={1}>
-                            <Table size="small" aria-label="purchases">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell className={classes.tr}>Quality</TableCell>
-                                        <TableCell className={classes.tr}>Count</TableCell>
-                                        <TableCell className={classes.tr}>Weft required</TableCell>
-                                        <TableCell className={classes.tr}>Weft issued</TableCell>
-                                        <TableCell className={classes.tr}>Balance weft</TableCell>
-                                        <TableCell className={classes.tr}>Last weft issue date</TableCell>
-                                        <TableCell className={classes.tr}>Next weft issue date</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {e.tableData.map((e) => (
-                                        <TableRow key={e.date} >
-                                            <TableCell>{e.Count}</TableCell>
-                                            <TableCell>{e.Count}</TableCell>
-                                            <TableCell>{e.Count}</TableCell>
-                                            <TableCell>{e.WeftRequired}</TableCell>
-                                            <TableCell>{e.WeftIssued}</TableCell>
-                                            <TableCell>{e.LastWeftIssueDate}</TableCell>
-                                            <TableCell>{e.NextIssueDate}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </Box>
-                    </Collapse>
-                </TableCell>
-            </TableRow>
-        </React.Fragment>
-    );
-}
-
-Row.propTypes = {
-    row: PropTypes.shape({
-        calories: PropTypes.number.isRequired,
-        carbs: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        history: PropTypes.arrayOf(
-            PropTypes.shape({
-                amount: PropTypes.number.isRequired,
-                customerId: PropTypes.string.isRequired,
-                date: PropTypes.string.isRequired,
-            }),
-        ).isRequired,
-        name: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        protein: PropTypes.number.isRequired,
-    }).isRequired,
-};
-
-
 
 export default function WeftTable() {
     const classes = useRowStyles();
     return (
-
         <TableContainer component={Paper}>
             <Table aria-label="collapsible table">
                 <TableHead >
                     <TableRow className={classes.table}>
-                        <TableCell />
+                        <TableCell>Ctr.No.</TableCell>
+                        <TableCell>Quality</TableCell>
                         <TableCell>Weaver</TableCell>
-                        <TableCell>Count</TableCell>
-                        <TableCell>Weft required</TableCell>
-                        <TableCell>Weft issued</TableCell>
-                        <TableCell>Balance weft</TableCell>
-                        <TableCell>Last weft issue date</TableCell>
-                        <TableCell>Next weft issue date</TableCell>
-                        <TableCell>Status</TableCell>
-                        <TableCell>Change button</TableCell>
+                        <TableCell>Beam Inward Mtrs</TableCell>
+                        <TableCell>Pending Mtrs</TableCell>
+                        <TableCell>Beam Required date</TableCell>
+                        <TableCell>Sizing Set issued</TableCell>
+                        <TableCell>Empty Beam Issue</TableCell>
+                        <TableCell>Beam Inward</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     {data.map((e) => (
-                        <Row key={e.name} e={e} />
+                        <TableRow key={e.date} >
+                            <TableCell align="center">Ctr {e.Ctr}</TableCell>
+                            <TableCell align="center">{e.Quality}</TableCell>
+                            <TableCell align="center">{e.Weaver}</TableCell>
+                            <TableCell align="center">{e.beamInMtrs}</TableCell>
+                            <TableCell align="center">
+
+                                <a
+                                    data-tip
+                                    data-for='one'
+                                    type='button'
+                                    //   href={`/doctor-info/${e._id}`}
+                                    className='zmdi zmdi-info-outline fontIcon'
+                                >{e.pendingMtrs}</a>
+                                <ReactTooltip id='one' type='' className="bg-primary" aria-haspopup='true'>
+                                    <div>Date - {e.beamReqDate}</div>
+                                    <div>Beam Mtrs - {e.beamInMtrs}</div>
+                                </ReactTooltip>
+
+
+                            </TableCell>
+                            <TableCell align="center">
+                                {e.beamReqDate}
+                                <i className='mdi green-info primary mdi-information' />
+                            </TableCell>
+                            <TableCell align="center">
+                                <Popup />
+                            </TableCell>
+                            <TableCell align="center">
+                                <a
+                                    data-tip
+                                    data-for='two'
+                                    type='button'
+                                    //   href={`/doctor-info/${e._id}`}
+                                    className='zmdi zmdi-info-outline fontIcon'
+                                >{e.emptyBeamIssue}</a>
+                                <ReactTooltip id='two' type='' className="bg-primary" aria-haspopup='true'>
+                                    <div>Flange No.</div>
+                                    <div>45</div>
+                                    <div>45</div>
+                                    <div>45</div>
+                                    <div>45</div>
+                                    <div>45</div>
+                                </ReactTooltip>
+
+                            </TableCell>
+                            <TableCell align="center">{e.beamIssueInward}</TableCell>
+                        </TableRow>
                     ))}
                 </TableBody>
             </Table>

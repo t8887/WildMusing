@@ -72,10 +72,9 @@ export default function Popup({ enquiry }) {
 
     return (
         <div>
-            <button onClick={handleOpen} className='btn btn-outline-primary p-1 btn-icon-text'>
-                <i className='mdi mdi-message-draw'></i> Issue Set
+            <button onClick={handleOpen} className='setbtn btn btn-outline-primary p-1 btn-icon-text'>
+                <i className='mdi mdi-message-draw '></i> Issue Set
             </button>
-
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
@@ -88,7 +87,6 @@ export default function Popup({ enquiry }) {
                     timeout: 500,
                 }}
             >
-
                 <Fade in={open}>
                     <div className={classes.paper}>
                         <Notifications />

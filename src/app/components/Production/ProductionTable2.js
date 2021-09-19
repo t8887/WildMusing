@@ -50,9 +50,9 @@ export default function BasicTable() {
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow>
-                            <TableCell align="center">{row.calories}</TableCell>
-                            <TableCell align="center">{row.calories}</TableCell>
-                            <TableCell align="center">
+                            <TableCell className='tablerow' align="center">{row.calories}</TableCell>
+                            <TableCell className='tablerow' align="center">{row.calories}</TableCell>
+                            <TableCell className='tablerow' align="center">
                                 <button className='btn btn-primary btn-rounded' style={{ backgroundColor: "#0064d0", color: 'white' }}>Request Dispatch</button>
                             </TableCell>
                         </TableRow>

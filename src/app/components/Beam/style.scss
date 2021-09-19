@@ -86,3 +86,46 @@ body {
 .popHeader {
   font-size: 18px;
 }
+.setbtn {
+  padding: 3px !important;
+  line-height: 1 !important;
+  // font-size: 0.475rem;
+}
+
+.MuiBox-root {
+  margin: 0px !important;
+}
+.indexedStep.accomplished {
+  background: #0074d9;
+}
+.btw {
+  // background: #0074d9;
+  box-shadow: 1px 1px 1px 1px black;
+  color: white;
+}
+
+.info {
+  color: #0074d9;
+  font-size: 20px;
+}
+.RSPBprogressBar {
+  margin: 20px;
+  height: 2px !important;
+  width: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.table-row2 {
+  padding: 2px !important;
+  font-weight: 400 !important;
+  border-bottom: 1px solid rgba(224, 224, 224, 0) !important;
+}
+.btm {
+  border-bottom: 0px !important;
+}
+faded-font {
+  color: #c4c4c4 !important;
+  font-family: "Roboto";
+  font-weight: 500;
+}

@@ -3,9 +3,12 @@ import InwardTable from './InwardTable'
 import './style.scss'
 import { api } from '../../../common/service-config.js'
 import axios from 'axios';
+import BeamTable from './BeamStatus.js'
 
 
 const Weaving = () => {
+
+    const [beam, SetBeam] = useState(true)
 
     useEffect(() => {
         const payload = {
@@ -16,6 +19,8 @@ const Weaving = () => {
     }, [])
 
 
+
+
     return (
         <div>
             <h4 className='title1'>Beam Inward and Beam Status</h4>
@@ -23,8 +28,8 @@ const Weaving = () => {
             <div className='enquiry-selection mb-2'>
                 <div className='row row1'>
                     <div className='col-6'>
-                        <button className='bt1 btn btn-outline-primary btn-rounded'>Sizing Status and Beam Inward</button>
-                        <button className='bt1 btn btn-outline-primary btn-rounded'>Beam Status</button>
+                        <button className='bt1 btn btn-outline-primary btn-rounded' onClick={e => SetBeam(true)}>Sizing Status and Beam Inward</button>
+                        <button className='bt1 btn btn-outline-primary btn-rounded' onClick={e => SetBeam(false)}>Beam Status</button>
                     </div>
                     <div className='col-6 posi'>
                         <input className='search1 float-right input-field' placeholder='Search here...' ></input>
@@ -33,10 +38,17 @@ const Weaving = () => {
 
                 </div>
                 <div>
-                    <InwardTable />
+                    {beam === true ?
+                        (
+                            <InwardTable />
+                        ) :
+                        (
+                            <BeamTable />
+                        )
+                    }
                 </div>
             </div>
-        </div>
+        </div >
     )
 }
 

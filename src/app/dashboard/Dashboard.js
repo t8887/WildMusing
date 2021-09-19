@@ -228,6 +228,9 @@ export class Dashboard extends Component {
     this.removeTodo = this.removeTodo.bind(this);
     this.inputChangeHandler = this.inputChangeHandler.bind(this);
   }
+  componantDidMount() {
+    window.location.reload(false);
+  }
   changeChartOneData = (e) => {
     const clicked = e.target.id;
     if (this.state.active === clicked) {

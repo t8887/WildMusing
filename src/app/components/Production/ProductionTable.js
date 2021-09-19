@@ -18,7 +18,10 @@ import './style.scss'
 
 const useRowStyles = makeStyles({
     root: {
+        // background: '#0064d0',
+        // color: '#ffffff',
 
+        fontColor: 'black',
     },
     head: {
         background: '#0064d0'
@@ -147,12 +150,12 @@ function Row(props) {
 
     return (
         <React.Fragment>
-            <TableRow className={classes.root}>
-                <TableCell align="center" component="th" scope="row">{e.Weaver}</TableCell>
-                <TableCell align="center">{e.Count}</TableCell>
-                <TableCell align="center">{e.Weaver}</TableCell>
-                <TableCell align="center">{e.Weaver}</TableCell>
-                <TableCell align="center">
+            <TableRow className={classes.tr}>
+                <TableCell align="center" className='tablerow' scope="row">{e.Weaver}</TableCell>
+                <TableCell align="center" className='tablerow'>{e.Count}</TableCell>
+                <TableCell align="center" className='tablerow'>{e.Weaver}</TableCell>
+                <TableCell align="center" className='tablerow'>{e.Weaver}</TableCell>
+                <TableCell align="center" className='tablerow'>
                     <button className='btn btn-primary btn-rounded' onClick={() => setOpen(!open)} style={{ backgroundColor: "#0064d0", color: 'white' }}>
                         Request Dispatch
                     </button>
@@ -177,11 +180,11 @@ function Row(props) {
                                 <TableBody>
                                     {e.tableData.map((e) => (
                                         <TableRow key={e.date} >
-                                            <TableCell>{e.Count}</TableCell>
-                                            <TableCell>{e.Count}</TableCell>
-                                            <TableCell>{e.WeftRequired}</TableCell>
-                                            <TableCell>
-                                                <button className='btn btn-primary btn-rounded view-btn'>
+                                            <TableCell className='tablerow'>{e.Count}</TableCell>
+                                            <TableCell className='tablerow'>{e.Count}</TableCell>
+                                            <TableCell className='tablerow'>{e.WeftRequired}</TableCell>
+                                            <TableCell className='tablerow'>
+                                                <button className='btn tablerow1 btn-primary btn-rounded view-btn'>
                                                     <i className='mdi mdi-eye ml-3' />
                                                     View Checking Resports
                                                 </button></TableCell>

@@ -51,10 +51,10 @@ export default function BasicTable() {
                 <TableBody>
                     {rows.map((row) => (
                         <TableRow>
-                            <TableCell align="center">{row.calories}</TableCell>
-                            <TableCell align="center">{row.calories}</TableCell>
-                            <TableCell align="center">{row.calories}</TableCell>
-                            <TableCell align="center">{row.calories}</TableCell>
+                            <TableCell align="center" className='tablerow'>{row.calories}</TableCell>
+                            <TableCell align="center" className='tablerow'>{row.calories}</TableCell>
+                            <TableCell align="center" className='tablerow'>{row.calories}</TableCell>
+                            <TableCell align="center" className='tablerow'>{row.calories}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

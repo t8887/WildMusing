@@ -20,6 +20,9 @@ const useRowStyles = makeStyles({
     root: {
 
     },
+    sh: {
+        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+    },
     head: {
         background: '#0064d0'
     },
@@ -155,7 +158,7 @@ const data = [
 
 function Row(props) {
     const { e } = props;
-    console.log('data1: ', e);
+    // console.log('data1: ', e);
     const [open, setOpen] = useState(false);
 
     // for btn in two tables
@@ -164,7 +167,7 @@ function Row(props) {
     const classes = useRowStyles();
 
     return (
-        <React.Fragment>
+        <React.Fragment className={classes.sh}>
             <TableRow key={e.name} className={classes.root} aria-label="expand row" onClick={() => setOpen(!open)}>
                 {/* <TableCell>
                     <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -207,25 +210,25 @@ function Row(props) {
                             <Table size="small" aria-label="purchases">
                                 <TableHead >
                                     <TableRow className={classes.th}>
-                                        <TableCell className={classes.tr}>Quality</TableCell>
-                                        <TableCell className={classes.tr}>Count</TableCell>
-                                        <TableCell className={classes.tr}>Weft required</TableCell>
-                                        <TableCell className={classes.tr}>Weft issued</TableCell>
-                                        <TableCell className={classes.tr}>Balance weft</TableCell>
-                                        <TableCell className={classes.tr}>Last weft issue date</TableCell>
-                                        <TableCell className={classes.tr}>Next weft issue date</TableCell>
+                                        <TableCell align='center' className={classes.tr}>Quality</TableCell>
+                                        <TableCell align='center' className={classes.tr}>Count</TableCell>
+                                        <TableCell align='center' className={classes.tr}>Weft required</TableCell>
+                                        <TableCell align='center' className={classes.tr}>Weft issued</TableCell>
+                                        <TableCell align='center' className={classes.tr}>Balance weft</TableCell>
+                                        <TableCell align='center' className={classes.tr}>Last weft issue date</TableCell>
+                                        <TableCell align='center' className={classes.tr}>Next weft issue date</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {e.tableData.map((e) => (
                                         <TableRow key={e.date} >
-                                            <TableCell>{e.Count}</TableCell>
-                                            <TableCell>{e.Count}</TableCell>
-                                            <TableCell>{e.Count}</TableCell>
-                                            <TableCell>{e.WeftRequired}</TableCell>
-                                            <TableCell>{e.WeftIssued}</TableCell>
-                                            <TableCell>{e.LastWeftIssueDate}</TableCell>
-                                            <TableCell>{e.NextIssueDate}</TableCell>
+                                            <TableCell align='center'>{e.Count}</TableCell>
+                                            <TableCell align='center'>{e.Count}</TableCell>
+                                            <TableCell align='center'>{e.Count}</TableCell>
+                                            <TableCell align='center'>{e.WeftRequired}</TableCell>
+                                            <TableCell align='center'>{e.WeftIssued}</TableCell>
+                                            <TableCell align='center'>{e.LastWeftIssueDate}</TableCell>
+                                            <TableCell align='center'>{e.NextIssueDate}</TableCell>
                                         </TableRow>
                                     ))}
                                 </TableBody>

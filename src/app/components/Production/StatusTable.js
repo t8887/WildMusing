@@ -136,12 +136,12 @@ function Row(props) {
     return (
         <React.Fragment>
             <TableRow className={classes.root}>
-                <TableCell component="th" scope="row">{e.Weaver}</TableCell>
-                <TableCell >{e.Count}</TableCell>
-                <TableCell >{e.Weaver}</TableCell>
-                <TableCell >{e.WeftRequired}</TableCell>
-                <TableCell >{e.BalanceWeft}</TableCell>
-                <TableCell >{e.NextIssueDate}</TableCell>
+                <TableCell className='tablerow' component="th" scope="row">{e.Weaver}</TableCell>
+                <TableCell className='tablerow'>{e.Count}</TableCell>
+                <TableCell className='tablerow'>{e.Weaver}</TableCell>
+                <TableCell className='tablerow'>{e.WeftRequired}</TableCell>
+                <TableCell className='tablerow'>{e.BalanceWeft}</TableCell>
+                <TableCell className='tablerow'>{e.NextIssueDate}</TableCell>
                 <TableCell>
                     <button className="btn btn-outline-success btn-rounded" size="small" onClick={() => setOpen(!open)}>
                         <i className='mdi mdi-truck-fast' />
@@ -153,21 +153,20 @@ function Row(props) {
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-
                             <div className='row1'>
-                                <TableCell align='center' className='table-row1'>Logistics Intimeted</TableCell>
+                                <TableCell align='center' className=' table-row1'>Logistics Intimeted</TableCell>
                                 <TableCell align='center' className='table-row1'>Slot Alloted</TableCell>
                                 <TableCell align='center' className='table-row1'>Good Loaded and In-Transit</TableCell>
                                 <TableCell align='center' className='table-row1'>Goods Delivered</TableCell>
                             </div>
                             <div className='row2'>
-                                <TableCell align='center' className='table-row2'>XYZ Logistics</TableCell>
-                                <TableCell align='center' className='table-row2 row'>
+                                <TableCell align='center' className='tablerow table-row2'>XYZ Logistics</TableCell>
+                                <TableCell align='center' className='tablerow table-row2 row'>
                                     <div>Date: 21/06/2020</div>
                                     <div>Slot : 60DS</div>
                                 </TableCell>
-                                <TableCell align='center' className='table-row2'>Text Here</TableCell>
-                                <TableCell align='center' className='table-row2'>
+                                <TableCell align='center' className=' tablerow table-row2'>Text Here</TableCell>
+                                <TableCell align='center' className=' tablerow table-row2'>
                                     <button
                                         className='btn btn-primary btn-rounded view-btn'>
                                         Delivery Challan
@@ -195,6 +194,7 @@ function Row(props) {
                                         </div>
                                     )}
                                 </Step>
+
                                 <Step>
                                     {({ accomplished, index }) => (
                                         <div

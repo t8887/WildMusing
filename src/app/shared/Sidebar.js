@@ -121,9 +121,21 @@ class Sidebar extends Component {
               <span className="menu-title">Quality Information</span>
             </Link>
           </li>
+          <li className={this.isPathActive('/Weaving') ? 'nav-item active' : 'nav-item'}>
+            <Link className="nav-link" to="/Weaving">
+              <i className="mdi mdi-message menu-icon"></i>
+              <span className="menu-title">Weaving Enquires & Responses</span>
+            </Link>
+          </li>
+          <li className={this.isPathActive('/Sizing') ? 'nav-item active' : 'nav-item'}>
+            <Link className="nav-link" to="/Sizing">
+              <i className="mdi mdi-message menu-icon"></i>
+              <span className="menu-title">Sizing Enquires & Responses</span>
+            </Link>
+          </li>
 
 
-          <li className={this.isPathActive('/user-pages') ? 'nav-item active' : 'nav-item'}>
+          {/* <li className={this.isPathActive('/user-pages') ? 'nav-item active' : 'nav-item'}>
             <div className={this.state.wevingMenuOpen ? 'nav-link menu-expanded' : 'nav-link'} onClick={() => this.toggleMenuState('wevingMenuOpen')} data-toggle="collapse">
               <i className="mdi mdi-lock-outline menu-icon"></i>
               <span className="menu-title"> Enquires & Responses</span>
@@ -135,14 +147,9 @@ class Sidebar extends Component {
                 <li className="nav-item"> <Link className={this.isPathActive('/Sizing') ? 'nav-link active' : 'nav-link'} to="/Sizing">Sizing</Link></li>
               </ul>
             </Collapse>
-          </li>
-
-          {/* <li className={this.isPathActive('/Sizing') ? 'nav-item active' : 'nav-item'}>
-            <Link className="nav-link" to="/Sizing">
-              <i className="mdi mdi-message menu-icon"></i>
-              <span className="menu-title">Sizing Enquires & Responses</span>
-            </Link>
           </li> */}
+
+
           <li className={this.isPathActive('/Weft') ? 'nav-item active' : 'nav-item'}>
             <Link className="nav-link" to="/Weft">
               <i className="mdi mdi-message menu-icon"></i>
@@ -156,10 +163,29 @@ class Sidebar extends Component {
               <span className="menu-title">Production</span>
             </Link>
           </li>
+
           <li className={this.isPathActive('/Beam') ? 'nav-item active' : 'nav-item'}>
             <Link className="nav-link" to="/Beam">
               <i className="mdi mdi-message menu-icon"></i>
               <span className="menu-title">Beam Inward and Beam Status</span>
+            </Link>
+          </li>
+          <li className={this.isPathActive('/TraderEnR') ? 'nav-item active' : 'nav-item'}>
+            <Link className="nav-link" to="/TraderEnR">
+              <i className="mdi mdi-message menu-icon"></i>
+              <span className="menu-title">TraderEnquries and Responses</span>
+            </Link>
+          </li>
+          <li className={this.isPathActive('/WProduction') ? 'nav-item active' : 'nav-item'}>
+            <Link className="nav-link" to="/WProduction">
+              <i className="mdi mdi-message menu-icon"></i>
+              <span className="menu-title">Prduction Update</span>
+            </Link>
+          </li>
+          <li className={this.isPathActive('/WeaverWeft') ? 'nav-item active' : 'nav-item'}>
+            <Link className="nav-link" to="/WeaverWeft">
+              <i className="mdi mdi-message menu-icon"></i>
+              <span className="menu-title">Weaver Weft Inward</span>
             </Link>
           </li>
 

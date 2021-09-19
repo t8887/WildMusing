@@ -9,6 +9,10 @@ import Select from '@material-ui/core/Select';
 import { api } from '../../../common/service-config.js'
 import Notifications, { notify } from 'react-notify-toast';
 import { useHistory } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment"
 
 import help from './helper.js'
 
@@ -28,11 +32,12 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         backgroundColor: theme.palette.background.paper,
-        width: '1286px',
-        height: '750px',
+        width: '1100px',
+        height: '600px',
         border: '1px solid #fff',
         boxShadow: theme.shadows[5],
-        padding: theme.spacing(6, 6, 6),
+        // padding: theme.spacing(6, 6, 6),
+        padding: "30px",
         borderRadius: '20px'
     },
     container: {
@@ -49,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 500,
         letterSpacing: "0.0275em",
         color: "#106dd2",
-        paddingBottom: '30px'
+        paddingBottom: '15px'
     },
     formControl: {
         width: '100%',
@@ -63,6 +68,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function TransitionsModal({ enquiry }) {
+
+
 
     const history = useHistory();
 
@@ -82,8 +89,11 @@ export default function TransitionsModal({ enquiry }) {
     const [remark, setRemark] = useState();
     const [radio, setRadio] = useState()
     const [radio2, setRadio2] = useState()
+    const [logout, setLogout] = useState(true)
 
     const [open, setOpen] = useState(false);
+
+
 
     useEffect(() => {
         sizingDrop();
@@ -103,14 +113,14 @@ export default function TransitionsModal({ enquiry }) {
             case 'demostar-admin-freereacttemplatedemo_1previewWeaving': {
                 title = 'Weaving Enquiries And Responses';
                 flag = "viewing_response/recent";
-                flag2 = "viewing_response/"
+                flag2 = "viewing_response"
 
                 break;
             }
             case 'demostar-admin-freereacttemplatedemo_1previewSizing': {
                 title = 'Sizzing Enquiries And Responses';
-                flag2 = "sizing/"
                 flag = "sizing/recent";
+                flag2 = "sizing"
                 break;
             }
             default: {
@@ -118,8 +128,17 @@ export default function TransitionsModal({ enquiry }) {
                 flag = 'viewing_response';
             }
         }
+        let newFrt = quality.split('')
+        newFrt.splice(0, 0, '"');
+        newFrt.splice(3, 0, '""');
+        newFrt.splice(6, 0, "");
+        newFrt.splice(8, 0, "*");
+        newFrt.splice(13, 0, "*");
+        newFrt.splice(11, 0, "/");
+        const getStr = newFrt.toString();
+        const newStr = getStr.replace(/,/g, '')
         const body = {
-            quality: quality,
+            quality: newStr,
             meter: meter,
             meter_type: radio,
             meter_type: radio,
@@ -133,6 +152,9 @@ export default function TransitionsModal({ enquiry }) {
             additional_remark: remark
         }
         const res = await api().post(`api/${flag2}`, JSON.stringify(body))
+        // const res = []
+        console.log('res: ', res);
+
 
         if (res.data.success === true) {
             notify.show("Enquiry Posted", 'success');
@@ -141,20 +163,32 @@ export default function TransitionsModal({ enquiry }) {
         }
     }
 
+
+    const loomsDrop = async () => {
+        const res = await api().get(`/api/looms`)
+        console.log('Loom: ', res);
+        setLoomdrop(res.data.data)
+        if (res.data.message === "Invalid Token...") {
+            setLogout(false)
+            notify.show("Token Expired", 'error');
+        }
+    }
     const sizingDrop = async () => {
         const res = await api().get(`/api/sizing`)
         setSizedrop(res.data.data)
 
+
+
         if (res.data.data.message === "Invalid Token...") {
-            history.push("/user-pages/login-1")
+            setLogout(false)
+            notify.show("Token Expired", 'error');
         }
     }
-    const loomsDrop = async () => {
-        const res = await api().get(`/api/looms`)
-        setLoomdrop(res.data.data)
-        if (res.data.data.message === "Invalid Token...") {
-            history.push("/user-pages/login-1")
-        }
+
+
+    if (logout === false) {
+        localStorage.removeItem("user-token");
+        history.push("/user-pages/login-1")
     }
 
 
@@ -162,25 +196,11 @@ export default function TransitionsModal({ enquiry }) {
 
     // all Handlers
     const handleQuality = e => {
-
         let str = e.target.value
-
-        // let newFrt = str.split('')
-        // console.log(newFrt)
-        // newFrt.splice(0, 0, '"');
-        // newFrt.splice(3, 0, '""');
-        // newFrt.splice(6, 0, "");
-        // newFrt.splice(8, 0, "*");
-        // newFrt.splice(13, 0, "*");
-        // newFrt.splice(11, 0, "/");
-        // const getStr = newFrt.toString();
-        // const newStr = getStr.replace(/,/g, '')
-        // console.log(newStr)
-        // setQuality(newStr)
         setQuality(str)
     }
     const handleChange = e => {
-        setprodDate(e)
+        setprodDate(moment(e).format("YYYY-MM-DD"))
     };
     const handleSizer = (event) => {
         setSizers(event.target.value);
@@ -221,48 +241,62 @@ export default function TransitionsModal({ enquiry }) {
                         <h4 className={classes.title}>Enquiry Details <i onClick={handleClose} className='mdi mdi-close float-right' /></h4>
                         <div className='row border-between'>
 
-                            <div className='col-8'>
-                                <div className='col-6 mr-3'>
-                                    <div className='row'>
-                                        <div className='col-12 mb-3'>Quality</div>
-                                    </div>
-                                    <input type="number" maxLength='999' className="input form-control rounded" value={quality} onChange={handleQuality} placeholder="" aria-label="Meter" aria-describedby="basic-addon1" />
-                                </div>
-
-                                {/* 1st row */}
-                                <div className='row mb-4'>
+                            <div className='col-7 line'>
+                                <div className='row mb-2'>
                                     <div className='col-6'>
                                         <div className='row'>
-                                            <div className='col-6'>Meter</div>
+                                            <div className='col-12 mb-2'>Quality</div>
+                                        </div>
+                                        <input
+                                            type="number"
+                                            maxLength='999'
+                                            className="input input1 form-control rounded"
+                                            value={quality}
+                                            onChange={handleQuality}
+                                            placeholder=""
+                                            aria-label="Meter"
+                                            aria-describedby="basic-addon1"
+                                        />
+                                    </div>
+                                </div>
+                                <div className='row mb-2'>
+                                    <div className='col-6'>
+                                        <div className='row'>
+                                            <div className='col-7 pl-3'>Meter</div>
                                             <div className='form-check mr-3'>
-                                                <input className="form-check-input"
+                                                <input className="radio form-check-input"
                                                     type="radio"
                                                     name="exampleRadios"
                                                     onChange={e => setRadio(e.target.value)}
                                                     id="exampleRadios1"
                                                     value="role"
                                                 />
-                                                <label className="form-check-label" >
+                                                <label className="radio1 form-check-label" >
                                                     Roll 1
                                                 </label>
                                             </div>
                                             <div className='form-check'>
-                                                <input className="form-check-input"
+                                                <input className="radio form-check-input"
                                                     type="radio"
                                                     name="exampleRadios"
                                                     onChange={e => setRadio(e.target.value)}
                                                     id="exampleRadios1"
                                                     value="taga"
                                                 />
-                                                <label className="form-check-label" >
+                                                <label className="radio1 form-check-label" >
                                                     Roll 2
                                                 </label>
                                             </div>
                                         </div>
-                                        <input type="text" className="input form-control rounded" value={meter} onChange={e => setMeter(e.target.value)} placeholder="Meter" aria-label="Meter" aria-describedby="basic-addon1" />
+                                        <input
+                                            type="text"
+                                            className="input input1 form-control rounded"
+                                            value={meter}
+                                            onChange={e => setMeter(e.target.value)}
+                                            placeholder="Meter" aria-label="Meter" aria-describedby="basic-addon1" />
                                     </div>
                                     <div className='col-6'>
-                                        <div className='col=6 mb-3'>Sizing</div>
+                                        <div className='col-6 mb-3'>Sizing</div>
                                         <FormControl variant="outlined" className={classes.formControl}>
                                             <Select
                                                 labelId="demo-simple-select-outlined-label"
@@ -274,15 +308,19 @@ export default function TransitionsModal({ enquiry }) {
                                                 <MenuItem value="">
                                                     <em>None</em>
                                                 </MenuItem>
-                                                {sizeDrop.map((e) => (
+                                                {sizeDrop && sizeDrop.length > 0 ? (sizeDrop.map((e) => (
                                                     <MenuItem value={e.id}>{e.name}</MenuItem>
-                                                ))}
+                                                ))) : (
+                                                    <MenuItem value="">
+                                                        <em>None</em>
+                                                    </MenuItem>
+                                                )}
                                             </Select>
                                         </FormControl>
                                     </div>
                                 </div>
                                 {/* 2nd row */}
-                                <div className='row mb-4'>
+                                <div className='row mb-2'>
                                     <div className='col-6'>
                                         <div className='row'>
                                             <div className='col-12 mb-3'>No. of Running Machine desired</div>
@@ -304,9 +342,13 @@ export default function TransitionsModal({ enquiry }) {
                                                 <MenuItem value="">
                                                     <em>None</em>
                                                 </MenuItem>
-                                                {loomDrop.map((e) => (
+                                                {loomDrop && loomDrop.length > 0 ? (loomDrop.map((e) => (
                                                     <MenuItem value={e.id}>{e.name}</MenuItem>
-                                                ))}
+                                                ))) : (
+                                                    <MenuItem value="">
+                                                        <em>None</em>
+                                                    </MenuItem>
+                                                )}
                                             </Select>
                                         </FormControl>
                                     </div>
@@ -314,31 +356,31 @@ export default function TransitionsModal({ enquiry }) {
                                 </div>
 
                                 {/* 3rd row */}
-                                <div className='row mb-4'>
+                                <div className='row mb-2'>
                                     <div className='col-6'>
-                                        <div className='row'>
-                                            <div className='col-6'>Negotiable job rate</div>
-                                            <div className='form-check mr-3'>
-                                                <input className="form-check-input"
+                                        <div className='row d-flex'>
+                                            <div className='col-7'>Negotiable job rate</div>
+                                            <div className=' form-check mr-3 float-right'>
+                                                <input className="radio form-check-input"
                                                     type="radio"
                                                     name="exampleRadios2"
                                                     onChange={e => setRadio2(e.target.value)}
                                                     id="exampleRadios2"
                                                     value="market"
                                                 />
-                                                <label className="form-check-label" >
+                                                <label className="radio1 form-check-label" >
                                                     Roll 1
                                                 </label>
                                             </div>
-                                            <div className='form-check'>
-                                                <input className="form-check-input"
+                                            <div className='form-check float-right'>
+                                                <input className="radio form-check-input"
                                                     type="radio"
                                                     name="exampleRadios2"
                                                     onChange={e => setRadio2(e.target.value)}
                                                     id="exampleRadios2"
                                                     value="custom"
                                                 />
-                                                <label className="form-check-label" >
+                                                <label className="radio1 form-check-label" >
                                                     Roll 2
                                                 </label>
                                             </div>
@@ -352,7 +394,7 @@ export default function TransitionsModal({ enquiry }) {
                                     </div>
                                     <div className='col-6'>
                                         <div className='col=6 mb-3'>Production schedule</div>
-                                        <div>
+                                        {/* <div>
 
                                             <form className={classes.container} noValidate>
                                                 <TextField
@@ -367,40 +409,54 @@ export default function TransitionsModal({ enquiry }) {
                                                 />
                                             </form>
 
+                                        </div> */}
+                                        {/* <Form.Group className="row"> */}
+                                        {/* <label className="col-sm-3 col-form-label">Date of Birth</label> */}
+                                        <div className="">
+                                            <DatePicker className="form-control input2 input form-control rounded  w-100"
+                                                selected={new Date()}
+                                                onChange={e => handleChange(e)}
+                                            />
                                         </div>
+                                        {/* </Form.Group> */}
                                     </div>
 
                                 </div>
                                 {/* 4th row */}
-                                <div className='row mb-4'>
+                                <div className='row mb-2'>
                                     <div className='col-6'>
                                         <div className='row'>
-                                            <div className='col-6'>Additional paper</div>
+                                            <div className='col-6 mb-3'>Additional paper</div>
                                         </div>
                                         <input type="text" className="form-control rounded" placeholder="paper" onChange={e => setAddPaper(e.target.value)} aria-label="Username" aria-describedby="basic-addon1" />
                                     </div>
                                     <div className='col-6'>
-                                        <div className='col=6'>Additional remark</div>
+                                        <div className='col=6 mb-3'>Additional remark</div>
                                         <input type="text" className="input1 form-control rounded" onChange={e => setRemark(e.target.value)} placeholder="remark" aria-label="Username" aria-describedby="basic-addon1" />
                                     </div>
                                 </div>
                                 <div>
-                                    <button className='btn btn-primary ' onClick={postQuery} style={{ backgroundColor: "#0064d0", color: 'white' }}>
+                                    <button className='btn btn-primary btn-rounded m-3' onClick={postQuery} style={{ backgroundColor: "#0064d0", color: 'white' }}>
                                         <i className='float-left mr-2 mdi mdi-send' />Submit</button>
-
                                 </div>
                             </div>
-                            <div className='col-4'>
+                            <div className='col-5'>
                                 <div>
                                     <div className='ml-3'>Recent Enquiries <i className='float-right mdi mdi-refresh' /></div>
                                     <hr className='ml-3' />
-                                    {enquiry.map((e) => (
+                                    {enquiry && enquiry.length > 0 ? (enquiry.map((e) => (
                                         <button type="button" key={e.e} className="btn btn-r btn-outline-primary btn-rounded m-2 pr-3 pl-3 shadow">
                                             <span className=''>
                                                 {e.quality}
                                             </span>
                                         </button>
-                                    ))}
+                                    ))) : (
+                                        <button type="button" className="btn btn-r btn-outline-primary btn-rounded m-2 pr-3 pl-3 shadow">
+                                            <span className=''>
+                                                No Enquiries
+                                            </span>
+                                        </button>
+                                    )}
                                 </div>
                                 <div className='mt-5'>
                                     <div className='ml-3' >Fevourite Enquiries <i className='float-right mdi mdi-heart' /></div>

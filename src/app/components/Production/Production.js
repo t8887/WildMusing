@@ -12,7 +12,7 @@ export default function Production() {
             <h4 className='title1'>Production Update</h4>
             <div className='row row1'>
                 <div className='col-6'>
-                    <button onClick={(e) => setWeaver(true)} className='bt1 btn btn-outline-primary btn-rounded'>Production Update</button>
+                    <button onClick={(e) => setWeaver(true)} className='bt1 btn btn-outline-primary btn-rounded '>Production Update</button>
                     <button onClick={(e) => setWeaver(false)} className='bt1 btn btn-outline-primary btn-rounded'>Delivery Status</button>
                 </div>
                 <div className='col-6 posi'>

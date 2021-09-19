@@ -9,6 +9,9 @@ import IconButton from '@material-ui/core/IconButton';
 import { red } from '@material-ui/core/colors';
 import Badge from '@material-ui/core/Badge';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SuccessPop from '../Hooks/SuccessPop'
+// E:\x2\x2\src\app\components\Hooks\SuccessPop.js
+// E:\x2\x2\src\app\components\weaving\EnquiriesCard.js
 import './style.scss'
 
 
@@ -21,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 500,
         maxWidth: 450,
         borderRadius: '20px',
-        marginBottom: '1rem'
+        marginBottom: '1rem',
+        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
     },
     typo: {
         fontSize: '1rem',
@@ -124,10 +128,10 @@ export default function EnquiriesCard(e) {
                         <span style={{ marginTop: '4px', marginLeft: '5px', fontSize: '10px' }}>Complete</span>
                     </div> */}
 
-                    <div>
-                        <i className="mdi mdi-minus-circle" style={{ color: "#5156BE", marginLeft: '5px' }} />
+                    <div className='d-flex'>
+                        <i className="mdi mdi-minus-circle " style={{ paddingLeft: "12px", color: "#5156BE", marginLeft: '5px' }} />
                         {/* <i className="mdi mdi-checkbox-blank-circle" style={{ color: "#34E15A", marginLeft: '5px' }} /> */}
-                        <span style={{ marginLeft: '5px', fontSize: '10px' }}>Partial Complete</span>
+                        <span style={{ paddingLeft: "12px", marginLeft: '5px', fontSize: '10px' }}>Partial Complete</span>
                     </div>
 
                     <IconButton
@@ -141,9 +145,15 @@ export default function EnquiriesCard(e) {
                         <ExpandMoreIcon />
                     </IconButton>
 
-                    <div className='float-center'>
-                        <button href="#" className="btn btn-outline-danger m-1" style={{ borderRadius: '10px' }}><i className='mdi mdi-close' />Reject</button>
-                        <button href="#" className="btn btn-outline-success m-1" style={{ borderRadius: '10px' }}><i className='mdi mdi-check' />Accept</button>
+                    <div className='float-center d-flex'>
+                        {/* <button href="#" className="btn btn-outline-danger m-1" style={{ borderRadius: '10px' }}><i className='mdi mdi-close' />Reject</button> */}
+                        {/* <button href="#" className="btn btn-outline-success m-1" style={{ borderRadius: '10px' }}><i className='mdi mdi-check' />Accept</button> */}
+                        <SuccessPop
+                            Reject="Reject"
+                        />
+                        <SuccessPop
+                            Success="Success"
+                        />
                     </div>
                 </CardActions>
 

@@ -21,7 +21,13 @@ const Sizing = lazy(() => import('./components/weaving/Weaving'));
 
 const Weft = lazy(() => import('./components/Weft/Weft'));
 
+const WeaverWeft = lazy(() => import('./components/WeaverWeft/WeaverWeft'));
+
 const Production = lazy(() => import('./components/Production/Production'));
+
+const WProduction = lazy(() => import('./components/WProduction/WProduction'));
+
+const TraderEnR = lazy(() => import('./components/TraderEnR/TraderEnR'));
 
 const Beam = lazy(() => import('./components/Beam/Beam'));
 
@@ -50,7 +56,10 @@ class AppRoutes extends Component {
           <Route path="/weaving" component={Weaving} />
           <Route path="/Sizing" component={Sizing} />
           <Route path="/Weft" component={Weft} />
+          <Route path="/WeaverWeft" component={WeaverWeft} />
           <Route path="/Production" component={Production} />
+          <Route path="/WProduction" component={WProduction} />
+          <Route path="/TraderEnR" component={TraderEnR} />
           <Route path="/Beam" component={Beam} />
           <Route path="/basic-ui/buttons" component={Buttons} />
           <Route path="/basic-ui/dropdowns" component={Dropdowns} />
